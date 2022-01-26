@@ -6,23 +6,38 @@ def _check(parms):
     
     encodedCube = parms.get('cube',None)       
     isS = isinstance(encodedCube, str)
-    countBlue = encodedCube.count('b')
-    countRed  = encodedCube.count('r')
-    countGreen = encodedCube.count('g')
-    countOrange = encodedCube.count('o')
-    countYellow = encodedCube.count('y')
-    countWhite = encodedCube.count('w')
-    blueFace = encodedCube[0:8]  #will only work if the cube is solved
-    redFace = encodedCube[9:17]  #will only work if the cube is solved
-    greenFace = encodedCube[18:26] #will only work if the cube is solved
-    orangeFace = encodedCube[27:35] #will only work if the cube is solved 
-    yellowFace = encodedCube[36:44] #will only work if the cube is solved
-    whiteFace  = encodedCube[45:53] #will only work if the cube is solved
     
-        
-    if(encodedCube == None):
-        result['status'] = 'error: cube is missing'
-    elif (encodedCube != None) and (isS == True) and (len(encodedCube) == 54) and (countBlue == countRed == countGreen == countOrange == countWhite == countYellow == 9) and (whiteFace != blueFace != yellowFace != redFace != greenFace != orangeFace) :
+    color1 = encodedCube[4]
+    color2 = encodedCube[31]
+    color3 = encodedCube[49]
+    color4 = encodedCube[22]
+    color5 = encodedCube[13]
+    color6 = encodedCube[40]    
+    countColor1 = encodedCube.count(color1)
+    countColor2  = encodedCube.count(color2)
+    countColor3 = encodedCube.count(color3)
+    countColor4 = encodedCube.count(color4)
+    countColor5 = encodedCube.count(color5)
+    countColor6 = encodedCube.count(color6)
+    
+   
+    
+    if (encodedCube != None) and (isS == True) and (len(encodedCube) == 54) and (countColor1 == countColor2 == countColor3 == countColor4 == countColor5 == countColor6 == 9) and (color1 != color2 != color3 != color4 != color5 != color6) :
         result['status'] = 'ok' 
+        
+    elif (encodedCube == None):
+        result['status'] = 'error: cube is missing'
+        
+    elif (isS == False):
+        result['status'] = 'error: cube is invalid'
+        
+    elif (len(encodedCube) < 54):
+        result['status'] = 'error: cube is too short'
+
+    elif (color1 == color2 or color1 == color3 or color1 == color2 or color1 == color3 or color1 == color4 or color1 == color5 or color1 == color6):
+        result['status'] = 'error: cube is missing'
+        
+    elif (countColor1 != countColor2 != countColor3 != countColor4 != countColor5 != countColor6 != 9):
+        result['status'] = 'error: cube is missing'
     return result
 
