@@ -1,6 +1,10 @@
 import rubik.cube as rubik
 from collections import Counter
 
+def _eachFaceHasAColor(parms):
+     encodedCube = parms.get('cube',None)    
+        
+    
 def _check(parms):
     result={}
     
@@ -20,8 +24,7 @@ def _check(parms):
     countColor5 = encodedCube.count(color5)
     countColor6 = encodedCube.count(color6)
     
-   
-    
+     
     if (encodedCube != None) and (isS == True) and (len(encodedCube) == 54) and (countColor1 == countColor2 == countColor3 == countColor4 == countColor5 == countColor6 == 9) and (color1 != color2 != color3 != color4 != color5 != color6) :
         result['status'] = 'ok' 
         
@@ -32,12 +35,16 @@ def _check(parms):
         result['status'] = 'error: cube is invalid'
         
     elif (len(encodedCube) < 54):
+        
         result['status'] = 'error: cube is too short'
 
-    elif (color1 == color2 or color1 == color3 or color1 == color2 or color1 == color3 or color1 == color4 or color1 == color5 or color1 == color6):
-        result['status'] = 'error: cube is missing'
+    elif (color1 == color2 or color1 == color3 or color1 == color4 or color1 == color5 or color1 == color6 or color2 == color3 or color2 == color4 or color2 == color5 or color2 == color6 or color3 == color4 or color3 == color5 or color3 == color6 or color4 == color5 or color4 == color6 or color5 == color6):
+        result['status'] = 'error: cube must have 6 distinct colors'
         
     elif (countColor1 != countColor2 != countColor3 != countColor4 != countColor5 != countColor6 != 9):
-        result['status'] = 'error: cube is missing'
+        result['status'] = 'error: cube must have 9 instances per color'
     return result
+
+    
+
 
