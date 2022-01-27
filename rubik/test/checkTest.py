@@ -19,7 +19,7 @@ class CheckTest(TestCase):
         status = result.get('status', None)
         self.assertEqual(status, 'ok')
         
-    def test_check_011_ShouldReturnErrorOnMixedCube(self):
+    def test_check_012_ShouldReturnErrorOnMixedCube(self):
         parm = {'op':'check',
                 'cube':'123456789'}
         result = check._check(parm)
@@ -27,4 +27,18 @@ class CheckTest(TestCase):
         status = result.get('status', None)
         self.assertEqual(status, 'ok')
         
+    def test_check_013_ShouldReturnErrorOnMixedCube(self):
+        parm = {'op':'check'}
+        result = check._check(parm)
+        self.assertIn('status', result)
+        status = result.get('status', None)
+        self.assertEqual(status, 'ok')
+                 
+    def test_check_014_ShouldReturnErrorOnMixedCube(self):
+        parm = {'op':'check',
+                'cube': 42}
+        result = check._check(parm)
+        self.assertIn('status', result)
+        status = result.get('status', None)
+        self.assertEqual(status, 'ok')
     
