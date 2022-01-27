@@ -26,3 +26,5 @@ class CheckTest(TestCase):
         self.assertIn('status', result)
         status = result.get('status', None)
         self.assertEqual(status, 'ok')
+        
+    
