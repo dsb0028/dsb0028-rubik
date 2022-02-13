@@ -62,4 +62,34 @@ class CheckTest(TestCase):
         self.assertIn('status', result)
         status = result.get('status', None)
         self.assertEqual(status, 'error: cube must have each middle face with a different color')
+       
+    def test_check_017_ShouldReturnErrorOnMixedCube(self):
+        #encodedCube[4] = 0
+        #encodedCube[13] = 2
+        #encodedCube[22] = 4
+        #encodedCube[31] = 0
+        #encodedCube[40] = 2
+        #encodedCube[49] = 4
+        parm = {'op':'check',
+                'cube':'000001111122222333334444455555000011112222333344445555'}
+        result = check._check(parm)
+        self.assertIn('status', result)
+        status = result.get('status', None)
+        self.assertEqual(status, 'error: cube must have each middle face with a different color')
         
+    def test_check_018_ShouldReturnErrorOnMixedCube(self):
+        #encodedCube[4] = 0
+        #encodedCube[13] = 2
+        #encodedCube[22] = 4
+        #encodedCube[31] = 0
+        #encodedCube[40] = 2
+        #encodedCube[49] = 4
+        parm = {'op':'check',
+                'cube':';;;;;1111122222333334444455555;;;;11112222333344445555'}
+        result = check._check(parm)
+        self.assertIn('status', result)
+        status = result.get('status', None)
+        self.assertEqual(status, 'error: cube must be alphanumeric')
+        
+       
+     
